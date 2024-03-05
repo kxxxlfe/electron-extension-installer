@@ -50,7 +50,7 @@ app.on("ready", async () => {
     loadExtensionOptions: {
       allowFileAccess: true,
     },
-    forceDownload: false, // 需要更新version时，首次设置为true，否则会一直使用上一次生效的
+    forceDownload: false, // 强制下载，不使用缓存
   });
 });
 ```
