@@ -6,6 +6,8 @@ import unzip from "./unzip";
 import { changePermissions, fetchCrxFile, getExtensionPath, getIdMap } from "./utils";
 import jetpack from "fs-jetpack";
 
+
+
 // These overrides are for extensions whose official CRX file hosted on google uses Chrome APIs unsupported by electron
 // Thankfully collected by @xupea
 const OVERRIDES = [
@@ -33,7 +35,7 @@ async function downloadChromeExtension(chromeStoreID: string, forceDownload: boo
       // https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&x=id%3D${nhdogjmejiglipccpnnnanhbledajbpd}%26uc&prodversion=32
       let fileURL = `https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&x=id%3D${chromeStoreID}%26uc&prodversion=${chromeVersion}`;
       if (OVERRIDES.includes(chromeStoreID)) {
-        fileURL = `https://github.com/jonluca/electron-extension-installer/raw/main/overrides/${chromeStoreID}.crx`;
+        fileURL = `https://github.com/kxxxlfe/electron-extension-installer/raw/main/overrides/${chromeStoreID}.crx`;
       }
 
       const filePath = path.resolve(`${extensionFolder}.crx`);
@@ -142,6 +144,7 @@ export const installExtension = async (
     targetSession.removeExtension(installedExtension.id);
   }
 
+  /*
   if (await isManifestVersion3(extensionFolder)) {
     throw new Error(`Manifest version 3 is not supported by electron. For more information, see:
     
@@ -150,6 +153,7 @@ export const installExtension = async (
     https://github.com/MarshallOfSound/electron-devtools-installer/issues/238
     https://github.com/electron/electron/blob/e3b7c3024f6f70155efb1022b691954280f983cb/docs/api/extensions.md#L1`);
   }
+  */
   const ext = await targetSession.loadExtension(extensionFolder, loadExtensionOptions);
   return ext.name;
 };
