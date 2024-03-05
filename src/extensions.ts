@@ -1,38 +1,13 @@
 import type { ExtensionReference } from "./index";
+import crxConfig from './crx.json'
 
-export const EMBER_INSPECTOR: ExtensionReference = {
-  id: "bmdblncegkenkacieihfhpjfppoconhi",
-  version: "4.9.1",
-};
-export const REACT_DEVELOPER_TOOLS: ExtensionReference = {
-  id: "fmkadmapgofadopljbjfkapdkoienihi",
-  version: "4.27.3",
-};
-export const BACKBONE_DEBUGGER: ExtensionReference = {
-  id: "bhljhndlimiafopmmhjlgfpnnchjjbhd",
-  version: "0.4.1",
-};
-export const JQUERY_DEBUGGER: ExtensionReference = {
-  id: "dbhhnnnpaeobfddmlalhnehgclcmjimi",
-  version: "0.1.3.2",
-};
-export const ANGULAR_DEVTOOLS: ExtensionReference = {
-  id: "ienfalfjdbdpebioblfackkekamfmbnh",
-  version: "1.0.7",
-};
-export const VUEJS_DEVTOOLS: ExtensionReference = {
-  id: "nhdogjmejiglipccpnnnanhbledajbpd",
-  version: "6.6.1",
-};
-export const REDUX_DEVTOOLS: ExtensionReference = {
-  id: "lmhkpmbekcpmknklioeibfkpmmfibljd",
-  version: "3.0.19",
-};
-export const APOLLO_DEVELOPER_TOOLS: ExtensionReference = {
-  id: "jdkknkkbebbapilgoeccciglkfbmbnfm",
-  version: "4.1.4",
-};
-export const MOBX_DEVTOOLS: ExtensionReference = {
-  id: "pfgnfdagidkfgccljigdamigbcnndkod",
-  version: "0.9.26",
-};
+// https://chrome.google.com/webstore/detail/bmdblncegkenkacieihfhpjfppoconhi
+export const EMBER_INSPECTOR: ExtensionReference = crxConfig['bmdblncegkenkacieihfhpjfppoconhi'];
+export const REACT_DEVELOPER_TOOLS: ExtensionReference = crxConfig['fmkadmapgofadopljbjfkapdkoienihi'];
+export const BACKBONE_DEBUGGER: ExtensionReference = crxConfig['bhljhndlimiafopmmhjlgfpnnchjjbhd'];
+export const JQUERY_DEBUGGER: ExtensionReference = crxConfig['dbhhnnnpaeobfddmlalhnehgclcmjimi']
+export const ANGULAR_DEVTOOLS: ExtensionReference = crxConfig['ienfalfjdbdpebioblfackkekamfmbnh'];
+export const VUEJS_DEVTOOLS: ExtensionReference = crxConfig['nhdogjmejiglipccpnnnanhbledajbpd']
+export const REDUX_DEVTOOLS: ExtensionReference = crxConfig['lmhkpmbekcpmknklioeibfkpmmfibljd']
+export const APOLLO_DEVELOPER_TOOLS: ExtensionReference = crxConfig['jdkknkkbebbapilgoeccciglkfbmbnfm']
+export const MOBX_DEVTOOLS: ExtensionReference = crxConfig['pfgnfdagidkfgccljigdamigbcnndkod']

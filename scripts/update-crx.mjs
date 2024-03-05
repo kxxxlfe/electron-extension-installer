@@ -1,6 +1,6 @@
 import path from 'path'
 import fs from 'fs'
-import crxConfig from '../crx.json' assert { type: "json" };
+import crxConfig from '../src/crx.json' assert { type: "json" };
 
 // 例子：https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&x=id%3Dnhdogjmejiglipccpnnnanhbledajbpd%26uc&prodversion=32
 // 从文件名抽取版本号
@@ -34,7 +34,7 @@ const updateCrx = async function() {
     }
 
     console.log('更新：crx.json', );
-    fs.writeFileSync(path.resolve(process.cwd(), 'crx.json'), JSON.stringify(crxConfig, null, 4))
+    fs.writeFileSync(path.resolve(process.cwd(), 'src/crx.json'), JSON.stringify(crxConfig, null, 4))
 
     console.log('更新完成', );
 }

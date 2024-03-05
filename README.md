@@ -1,7 +1,8 @@
-# 新增功能
+# 新功能
 
 - 移除 `manifest v3` 的报错提示
-- 更新crx脚本
+
+## 更新crx脚本
 
 ```
 npm run crx
@@ -25,6 +26,10 @@ npm run crx
 更新：crx.json
 更新完成
 ```
+
+## 如何新增extension
+  - 本地新增：不用vpn，修改`crx.json`，添加一个空数据，执行`npm run crx`
+  - 非本地新增：需要能访问`Google`，直接`loadExtensionOptions`传递目标`extension`的`hash`
 
 # Electron Extension Installer
 

@@ -5,6 +5,7 @@ import * as rimraf from "rimraf";
 import unzip from "./unzip";
 import { changePermissions, fetchCrxFile, getExtensionPath, getIdMap } from "./utils";
 import jetpack from "fs-jetpack";
+import crxConfig from './crx.json'
 
 // global options
 let forceDownload = false
@@ -20,17 +21,7 @@ const getManifest = async (manifestDirectory: string) => {
 
 // These overrides are for extensions whose official CRX file hosted on google uses Chrome APIs unsupported by electron
 // Thankfully collected by @xupea
-const OVERRIDES = [
-  "bhljhndlimiafopmmhjlgfpnnchjjbhd",
-  "bmdblncegkenkacieihfhpjfppoconhi",
-  "dbhhnnnpaeobfddmlalhnehgclcmjimi",
-  "fmkadmapgofadopljbjfkapdkoienihi",
-  "ienfalfjdbdpebioblfackkekamfmbnh",
-  "jdkknkkbebbapilgoeccciglkfbmbnfm",
-  "lmhkpmbekcpmknklioeibfkpmmfibljd",
-  "nhdogjmejiglipccpnnnanhbledajbpd",
-  "pfgnfdagidkfgccljigdamigbcnndkod",
-];
+const OVERRIDES = Object.keys(crxConfig);
 async function downloadChromeExtension(chromeStoreID: string, chromeStoreVer: string, attempts = 5): Promise<string> {
   try {
     const extensionsStore = getExtensionPath();
@@ -121,7 +112,8 @@ export const installExtension = async (
   options: ExtensionOptions = {},
 ): Promise<string | string[]> => {
   const targetSession = typeof options.session === 'string' ? session.fromPartition(options.session) : options.session || session.defaultSession;
-  const { forceDownload, loadExtensionOptions } = options;
+  const { loadExtensionOptions } = options;
+  forceDownload = !!options.forceDownload
 
   if (process.type !== "browser") {
     throw new Error("electron-devtools-assembler can only be used from the main process");
