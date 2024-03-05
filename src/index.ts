@@ -6,7 +6,17 @@ import unzip from "./unzip";
 import { changePermissions, fetchCrxFile, getExtensionPath, getIdMap } from "./utils";
 import jetpack from "fs-jetpack";
 
+// global options
+let forceDownload = false
 
+const getManifest = async (manifestDirectory: string) => {
+  try {
+    const file = await jetpack.readAsync(path.join(manifestDirectory, "manifest.json"), "json");
+    return file;
+  } catch (e) {
+    return false;
+  }
+};
 
 // These overrides are for extensions whose official CRX file hosted on google uses Chrome APIs unsupported by electron
 // Thankfully collected by @xupea
@@ -21,37 +31,47 @@ const OVERRIDES = [
   "nhdogjmejiglipccpnnnanhbledajbpd",
   "pfgnfdagidkfgccljigdamigbcnndkod",
 ];
-async function downloadChromeExtension(chromeStoreID: string, forceDownload: boolean, attempts = 5): Promise<string> {
+async function downloadChromeExtension(chromeStoreID: string, chromeStoreVer: string, attempts = 5): Promise<string> {
   try {
     const extensionsStore = getExtensionPath();
     await jetpack.dirAsync(extensionsStore);
     const extensionFolder = path.resolve(`${extensionsStore}/${chromeStoreID}`);
     const extensionDirExists = await jetpack.existsAsync(extensionFolder);
-    if (!extensionDirExists || forceDownload) {
-      if (extensionDirExists) {
-        rimraf.sync(extensionFolder);
-      }
-      const chromeVersion = process.versions.chrome || 32;
-      // https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&x=id%3D${nhdogjmejiglipccpnnnanhbledajbpd}%26uc&prodversion=32
-      let fileURL = `https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&x=id%3D${chromeStoreID}%26uc&prodversion=${chromeVersion}`;
-      if (OVERRIDES.includes(chromeStoreID)) {
-        fileURL = `https://github.com/kxxxlfe/electron-extension-installer/raw/main/overrides/${chromeStoreID}.crx`;
-      }
 
-      const filePath = path.resolve(`${extensionFolder}.crx`);
-      await fetchCrxFile(fileURL, filePath);
-
-      try {
-        await unzip(filePath, extensionFolder);
-        changePermissions(extensionFolder, 755);
-        return extensionFolder;
-      } catch (err: any) {
-        if (!(await jetpack.existsAsync(path.resolve(extensionFolder, "manifest.json")))) {
-          throw err;
+    // 不强制下载，而且版本号匹配，走缓存
+    if (extensionDirExists && !forceDownload) {
+      if (chromeStoreVer) {
+        const manifest = await getManifest(extensionFolder);
+        if (manifest.version === chromeStoreVer) {
+          return extensionFolder;
         }
+      } else {
+        return extensionFolder;
       }
-    } else {
+    }
+
+    // 下载流程
+    if (extensionDirExists) {
+      rimraf.sync(extensionFolder);
+    }
+    const chromeVersion = process.versions.chrome || 32;
+    // https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&x=id%3D${nhdogjmejiglipccpnnnanhbledajbpd}%26uc&prodversion=32
+    let fileURL = `https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&x=id%3D${chromeStoreID}%26uc&prodversion=${chromeVersion}`;
+    if (OVERRIDES.includes(chromeStoreID)) {
+      fileURL = `https://github.com/kxxxlfe/electron-extension-installer/raw/main/overrides/${chromeStoreID}.crx`;
+    }
+
+    const filePath = path.resolve(`${extensionFolder}.crx`);
+    await fetchCrxFile(fileURL, filePath);
+
+    try {
+      await unzip(filePath, extensionFolder);
+      changePermissions(extensionFolder, 755);
       return extensionFolder;
+    } catch (err: any) {
+      if (!(await jetpack.existsAsync(path.resolve(extensionFolder, "manifest.json")))) {
+        throw err;
+      }
     }
   } catch (err) {
     console.log(`Failed to fetch extension, trying ${attempts - 1} more times`);
@@ -59,7 +79,7 @@ async function downloadChromeExtension(chromeStoreID: string, forceDownload: boo
       throw err;
     }
     await new Promise((resolve) => setTimeout(resolve, 200));
-    return downloadChromeExtension(chromeStoreID, forceDownload, attempts - 1);
+    return downloadChromeExtension(chromeStoreID, chromeStoreVer, attempts - 1);
   }
 
   throw new Error("Failed to fetch extension");
@@ -91,15 +111,6 @@ export interface ExtensionOptions {
   session?: string | Session;
 }
 
-const isManifestVersion3 = async (manifestDirectory: string) => {
-  try {
-    const file = await jetpack.readAsync(path.join(manifestDirectory, "manifest.json"), "json");
-    return file.manifest_version === 3;
-  } catch (e) {
-    return false;
-  }
-};
-
 /**
  * @param extensionReference Extension or extensions to install
  * @param options Installation options
@@ -121,8 +132,10 @@ export const installExtension = async (
     return installed.flat();
   }
   let chromeStoreID: string;
+  let chromeStoreVer = ''
   if (typeof extensionReference === "object" && extensionReference.id) {
     chromeStoreID = extensionReference.id;
+    chromeStoreVer = extensionReference.version || '';
   } else if (typeof extensionReference === "string") {
     chromeStoreID = extensionReference;
   } else {
@@ -138,7 +151,7 @@ export const installExtension = async (
     return IDMap[chromeStoreID];
   }
 
-  const extensionFolder = await downloadChromeExtension(chromeStoreID, Boolean(forceDownload));
+  const extensionFolder = await downloadChromeExtension(chromeStoreID, chromeStoreVer);
   // Use forceDownload, but already installed
   if (installedExtension) {
     targetSession.removeExtension(installedExtension.id);
