@@ -22,7 +22,7 @@ export const ANGULAR_DEVTOOLS: ExtensionReference = {
 };
 export const VUEJS_DEVTOOLS: ExtensionReference = {
   id: "nhdogjmejiglipccpnnnanhbledajbpd",
-  version: "6.5.0",
+  version: "6.6.1",
 };
 export const REDUX_DEVTOOLS: ExtensionReference = {
   id: "lmhkpmbekcpmknklioeibfkpmmfibljd",

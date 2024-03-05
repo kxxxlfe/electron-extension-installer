@@ -30,6 +30,7 @@ async function downloadChromeExtension(chromeStoreID: string, forceDownload: boo
         rimraf.sync(extensionFolder);
       }
       const chromeVersion = process.versions.chrome || 32;
+      // https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&x=id%3D${nhdogjmejiglipccpnnnanhbledajbpd}%26uc&prodversion=32
       let fileURL = `https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&x=id%3D${chromeStoreID}%26uc&prodversion=${chromeVersion}`;
       if (OVERRIDES.includes(chromeStoreID)) {
         fileURL = `https://github.com/jonluca/electron-extension-installer/raw/main/overrides/${chromeStoreID}.crx`;
