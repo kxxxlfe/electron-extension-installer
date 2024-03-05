@@ -1,8 +1,7 @@
 {
-  "name": "electron-extension-installer",
-  "version": "0.0.0-development",
+  "name": "@kxxxl-front-end/electron-extension-installer",
+  "version": "0.0.1",
   "license": "MIT",
-  "author": "Jonluca DeCaro <electronextension@jonlu.ca>",
   "description": "Install any extension into electron",
   "types": "dist/index.d.ts",
   "files": [
