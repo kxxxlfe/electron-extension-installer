@@ -19,12 +19,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jonluca/electron-extension-installer.git"
+    "url": "git+https://github.com/kxxxlfe/electron-extension-installer.git"
   },
-  "bugs": {
-    "url": "https://github.com/jonluca/electron-extension-installer/issues"
-  },
-  "homepage": "https://github.com/jonluca/electron-extension-installer",
+  "homepage": "https://github.com/kxxxlfe/electron-extension-installer",
   "scripts": {
     "prepublishOnly": "yarn build",
     "lint": "eslint src",
