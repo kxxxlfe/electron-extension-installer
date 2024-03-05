@@ -12,9 +12,10 @@ const saveCrx = async function(extensionId, filePath) {
      fs.writeFileSync(filePath, Buffer.from(buffer))
 
      // 提取版本号数据
-     let versionStr = response.url?.match(/_(\d_)*\.crx/)?.[1];
+     let versionStr = response.url?.match(/_([\d_]*)\.crx$/)?.[1];
      versionStr = versionStr.split('_').join('.')
      versionStr = versionStr.endsWith('.0') ? versionStr.slice(0, -2) : versionStr
+
      return {
         version: versionStr
      };
@@ -23,12 +24,13 @@ const saveCrx = async function(extensionId, filePath) {
 const updateCrx = async function() {
     const crxIds = Object.keys(crxConfig);
 
-    for (let id in crxIds) {
+    for (let id of crxIds) {
+        const config = crxConfig[id]
         console.log('更新：', id);
-        const { version } = await saveCrx(id, path.resolve('../overrides', `${id}.crx`));
-        console.log(`更新：`, id, `版本 ${crxConfig.version} to ${version}`);
-        crxConfig.version = version
-        crxConfig.id = id
+        const { version } = await saveCrx(id, path.resolve(process.cwd(), './overrides', `${id}.crx`));
+        console.log(`更新：`, id, `版本 ${config.version} to ${version}`);
+        config.version = version
+        config.id = id
     }
 
     console.log('更新：crx.json', );
