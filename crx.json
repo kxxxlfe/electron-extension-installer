@@ -1,11 +1,38 @@
 {
-    "bhljhndlimiafopmmhjlgfpnnchjjbhd": {"version": "0.4.1"},
-    "bmdblncegkenkacieihfhpjfppoconhi": {"version": "4.9.1"},
-    "dbhhnnnpaeobfddmlalhnehgclcmjimi": {"version": "0.1.3.2"},
-    "fmkadmapgofadopljbjfkapdkoienihi": {"version": "4.27.3"},
-    "ienfalfjdbdpebioblfackkekamfmbnh": {"version": "1.0.7"},
-    "jdkknkkbebbapilgoeccciglkfbmbnfm": {"version": "4.1.4"},
-    "lmhkpmbekcpmknklioeibfkpmmfibljd": {"version": "3.0.19"},
-    "nhdogjmejiglipccpnnnanhbledajbpd": {"version": "6.6.1"},
-    "pfgnfdagidkfgccljigdamigbcnndkod": {"version": "0.9.26"}
+    "bhljhndlimiafopmmhjlgfpnnchjjbhd": {
+        "version": "0.4.1",
+        "id": "bhljhndlimiafopmmhjlgfpnnchjjbhd"
+    },
+    "bmdblncegkenkacieihfhpjfppoconhi": {
+        "version": "4.11.0",
+        "id": "bmdblncegkenkacieihfhpjfppoconhi"
+    },
+    "dbhhnnnpaeobfddmlalhnehgclcmjimi": {
+        "version": "0.1.3.2",
+        "id": "dbhhnnnpaeobfddmlalhnehgclcmjimi"
+    },
+    "fmkadmapgofadopljbjfkapdkoienihi": {
+        "version": "5.0.0",
+        "id": "fmkadmapgofadopljbjfkapdkoienihi"
+    },
+    "ienfalfjdbdpebioblfackkekamfmbnh": {
+        "version": "1.0.11",
+        "id": "ienfalfjdbdpebioblfackkekamfmbnh"
+    },
+    "jdkknkkbebbapilgoeccciglkfbmbnfm": {
+        "version": "4.8.0",
+        "id": "jdkknkkbebbapilgoeccciglkfbmbnfm"
+    },
+    "lmhkpmbekcpmknklioeibfkpmmfibljd": {
+        "version": "3.1.6",
+        "id": "lmhkpmbekcpmknklioeibfkpmmfibljd"
+    },
+    "nhdogjmejiglipccpnnnanhbledajbpd": {
+        "version": "6.6.1",
+        "id": "nhdogjmejiglipccpnnnanhbledajbpd"
+    },
+    "pfgnfdagidkfgccljigdamigbcnndkod": {
+        "version": "0.9.26",
+        "id": "pfgnfdagidkfgccljigdamigbcnndkod"
+    }
 }

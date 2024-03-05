@@ -34,7 +34,7 @@ const updateCrx = async function() {
     }
 
     console.log('更新：crx.json', );
-    fs.writeFileSync(path.resolve('../crx.json'), JSON.stringify(crxConfig, null, 4))
+    fs.writeFileSync(path.resolve(process.cwd(), 'crx.json'), JSON.stringify(crxConfig, null, 4))
 
     console.log('更新完成', );
 }
