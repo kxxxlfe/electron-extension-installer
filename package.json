@@ -29,7 +29,7 @@
     "prepublishOnly": "yarn build",
     "lint": "eslint src",
     "build": "rimraf dist/* && tsc -p tsconfig.json",
-    "crx": "node --experimental-fetch --inspect-brk ./scripts/update-crx.mjs",
+    "crx": "node --experimental-fetch ./scripts/update-crx.mjs",
     "typecheck": "tsc --noEmit",
     "prettier": "prettier --write \"**/*.+(js|jsx|ts|tsx|har||json|css|md)\""
   },
