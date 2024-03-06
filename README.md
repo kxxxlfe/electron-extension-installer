@@ -31,6 +31,11 @@ npm run crx
   - 本地新增：不用vpn，修改`crx.json`，添加一个空数据，执行`npm run crx`
   - 非本地新增：需要能访问`Google`，直接`loadExtensionOptions`传递目标`extension`的`hash`
 
+## 如何发布
+```
+npm run crx && npm publish
+```
+
 # Electron Extension Installer
 
 [![npm Version](https://img.shields.io/npm/v/electron-extension-installer.svg)](https://www.npmjs.com/package/electron-extension-installer) [![License](https://img.shields.io/npm/l/electron-extension-installer.svg)](https://www.npmjs.com/package/electron-extension-installer)
