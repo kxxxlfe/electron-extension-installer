@@ -8,6 +8,7 @@ export const BACKBONE_DEBUGGER: ExtensionReference = crxConfig['bhljhndlimiafopm
 export const JQUERY_DEBUGGER: ExtensionReference = crxConfig['dbhhnnnpaeobfddmlalhnehgclcmjimi']
 export const ANGULAR_DEVTOOLS: ExtensionReference = crxConfig['ienfalfjdbdpebioblfackkekamfmbnh'];
 export const VUEJS_DEVTOOLS: ExtensionReference = crxConfig['nhdogjmejiglipccpnnnanhbledajbpd']
+export const VUE2_DEVTOOLS: ExtensionReference = crxConfig['iaajmlceplecbljialhhkmedjlpdblhp']
 export const REDUX_DEVTOOLS: ExtensionReference = crxConfig['lmhkpmbekcpmknklioeibfkpmmfibljd']
 export const APOLLO_DEVELOPER_TOOLS: ExtensionReference = crxConfig['jdkknkkbebbapilgoeccciglkfbmbnfm']
 export const MOBX_DEVTOOLS: ExtensionReference = crxConfig['pfgnfdagidkfgccljigdamigbcnndkod']
