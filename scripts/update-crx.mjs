@@ -2,6 +2,16 @@ import path from 'path'
 import fs from 'fs'
 import crxConfig from '../src/crx.json' with { type: "json" };
 
+const downloadFile = async function({ url, file }) {
+    const response = await fetch(url, {
+        method: 'GET',
+    })
+    const buffer = await response.arrayBuffer()
+    fs.writeFileSync(file, Buffer.from(buffer))
+
+    return response
+}
+
 // 例子：https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&x=id%iaajmlceplecbljialhhkmedjlpdblhp%26uc&prodversion=999999
 // 从文件名抽取版本号
 const saveCrx = async function(extensionId, filePath) {
@@ -21,16 +31,41 @@ const saveCrx = async function(extensionId, filePath) {
      };
 }
 
+const saveZIP = async function({ config, folder }) {
+    let version = '0'
+    const res = await fetch(config.githubRelease);
+    const releases = await res.json()
+    if (!releases?.length) {
+        return { version };
+    }
+
+    const { name, assets } = releases[0]
+    version = name;
+    const latestZipUrl = assets[0]?.browser_download_url
+    if (!latestZipUrl) {
+        return { version }
+    }
+
+    await downloadFile({ url: latestZipUrl, file: path.resolve(folder, `${config.id}@${version}.zip`)});
+
+    return {
+        version: name
+     };
+}
+
 const updateCrx = async function() {
     const crxIds = Object.keys(crxConfig);
 
     for (let id of crxIds) {
         const config = crxConfig[id]
         console.log('更新：', id);
-        const { version } = await saveCrx(id, path.resolve(process.cwd(), './overrides', `${id}.crx`));
+        config.id = id
+        const save = config.githubRelease ? 
+            saveZIP({ config, folder: path.resolve(process.cwd(), './overrides') }): 
+            saveCrx(id, path.resolve(process.cwd(), './overrides', `${id}.crx`))
+        const { version } = await save;
         console.log(`更新：`, id, `版本 ${config.version} to ${version}`);
         config.version = version
-        config.id = id
     }
 
     console.log('更新：crx.json', );
