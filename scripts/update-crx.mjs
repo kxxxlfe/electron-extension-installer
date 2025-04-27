@@ -1,6 +1,6 @@
 import path from 'path'
 import fs from 'fs'
-import crxConfig from '../src/crx.json' assert { type: "json" };
+import crxConfig from '../src/crx.json' with { type: "json" };
 
 // 例子：https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&x=id%3Dnhdogjmejiglipccpnnnanhbledajbpd%26uc&prodversion=32
 // 从文件名抽取版本号
