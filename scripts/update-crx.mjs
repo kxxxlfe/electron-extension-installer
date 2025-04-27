@@ -46,7 +46,7 @@ const saveZIP = async function({ config, folder }) {
         return { version }
     }
 
-    await downloadFile({ url: latestZipUrl, file: path.resolve(folder, `${config.id}@${version}.zip`)});
+    await downloadFile({ url: latestZipUrl, file: path.resolve(folder, `${config.id}.zip`)});
 
     return {
         version: name

@@ -12,3 +12,4 @@ export const VUE2_DEVTOOLS: ExtensionReference = crxConfig['iaajmlceplecbljialhh
 export const REDUX_DEVTOOLS: ExtensionReference = crxConfig['lmhkpmbekcpmknklioeibfkpmmfibljd']
 export const APOLLO_DEVELOPER_TOOLS: ExtensionReference = crxConfig['jdkknkkbebbapilgoeccciglkfbmbnfm']
 export const MOBX_DEVTOOLS: ExtensionReference = crxConfig['pfgnfdagidkfgccljigdamigbcnndkod']
+export const VUE2_DEVTOOLS_EXTENDED: ExtensionReference = crxConfig['vue2_devtools_extended']

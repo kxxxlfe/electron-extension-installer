@@ -85,6 +85,7 @@ export interface ExtensionReference {
    * Working version
    */
   version?: string;
+  githubRelease?: string;
 }
 
 export interface ExtensionOptions {
