@@ -2,10 +2,10 @@ import path from 'path'
 import fs from 'fs'
 import crxConfig from '../src/crx.json' with { type: "json" };
 
-// 例子：https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&x=id%3Dnhdogjmejiglipccpnnnanhbledajbpd%26uc&prodversion=32
+// 例子：https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&x=id%iaajmlceplecbljialhhkmedjlpdblhp%26uc&prodversion=999999
 // 从文件名抽取版本号
 const saveCrx = async function(extensionId, filePath) {
-    const response = await fetch(`https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&x=id%3D${extensionId}%26uc&prodversion=32`, {
+    const response = await fetch(`https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx3&x=id%3D${extensionId}%26uc&prodversion=999999`, {
         method: 'GET',
      })
      const buffer = await response.arrayBuffer()
