@@ -2,6 +2,7 @@ import type { LoadExtensionOptions, Session } from "electron";
 import { session } from "electron";
 import * as path from "path";
 import * as rimraf from "rimraf";
+import fsp from 'fs/promises'
 import unzip from "./unzip";
 import { changePermissions, fetchCrxFile, getExtensionPath, getIdMap } from "./utils";
 import jetpack from "fs-jetpack";
@@ -9,6 +10,7 @@ import crxConfig from './crx.json'
 
 // global options
 let forceDownload = false
+const pkgName = '@kxxxl-front-end/electron-extension-installer';
 
 const getManifest = async (manifestDirectory: string) => {
   try {
@@ -45,15 +47,28 @@ async function downloadChromeExtension(chromeStoreID: string, chromeStoreVer: st
     if (extensionDirExists) {
       rimraf.sync(extensionFolder);
     }
-    const chromeVersion = process.versions.chrome || 99999;
-    // https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&x=id%3D${nhdogjmejiglipccpnnnanhbledajbpd}%26uc&prodversion=32
-    let fileURL = `https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&x=id%3D${chromeStoreID}%26uc&prodversion=${chromeVersion}`;
-    if (OVERRIDES.includes(chromeStoreID)) {
-      fileURL = `https://github.com/kxxxlfe/electron-extension-installer/raw/main/overrides/${chromeStoreID}.crx`;
-    }
 
+    // 目标文件目录
     const filePath = path.resolve(`${extensionFolder}.crx`);
-    await fetchCrxFile(fileURL, filePath);
+
+    // 直接使用pkg的缓存文件
+    const pkgNodeRoot = require.resolve(pkgName)?.replace('dist/index.js', '') || '';
+    const pkgExtPath = path.resolve(pkgNodeRoot, `./overrides/${chromeStoreID}.crx`);
+    const pkgExtExist = await jetpack.existsAsync(pkgExtPath)
+    // 直接拷贝文件
+    if (pkgExtExist === 'file') {
+      await jetpack.copyAsync(pkgExtPath, filePath, { overwrite: true })
+    } 
+    // 从git下载
+    else {
+      const chromeVersion = process.versions.chrome || 99999;
+      // https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&x=id%3D${nhdogjmejiglipccpnnnanhbledajbpd}%26uc&prodversion=32
+      let fileURL = `https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&x=id%3D${chromeStoreID}%26uc&prodversion=${chromeVersion}`;
+      if (OVERRIDES.includes(chromeStoreID)) {
+        fileURL = `https://github.com/kxxxlfe/electron-extension-installer/raw/main/overrides/${chromeStoreID}.crx`;
+      }
+      await fetchCrxFile(fileURL, filePath);
+    }
 
     try {
       await unzip(filePath, extensionFolder);
