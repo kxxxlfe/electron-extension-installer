@@ -1,6 +1,7 @@
 # 新功能
 
 - 移除 `manifest v3` 的报错提示
+- 增加性能优化版本的`vue2 devtools`
 
 ## 更新crx脚本
 
@@ -36,6 +37,24 @@ npm run crx
 npm run crx && npm publish
 ```
 
+## 本地`link`开发
+直接 `import` `index.ts` 
+
+# 使用
+
+```typescript
+import { installExtension, VUE2_DEVTOOLS_EXTENDED } from "@kxxxl-front-end/electron-extension-installer";
+
+app.on("ready", async () => {
+  await installExtension(VUE2_DEVTOOLS_EXTENDED, {
+    loadExtensionOptions: {
+      allowFileAccess: true,
+    },
+    forceDownload: false, // 强制下载，不使用缓存
+  });
+});
+```
+
 # Electron Extension Installer
 
 [![npm Version](https://img.shields.io/npm/v/electron-extension-installer.svg)](https://www.npmjs.com/package/electron-extension-installer) [![License](https://img.shields.io/npm/l/electron-extension-installer.svg)](https://www.npmjs.com/package/electron-extension-installer)
@@ -48,19 +67,4 @@ This library is a modernized version of `electron-devtools-installer`. It is tes
 
 ```
 npm i --save electron-extension-installer
-```
-
-# Usage
-
-```typescript
-import { installExtension, REACT_DEVELOPER_TOOLS } from "electron-extension-installer";
-
-app.on("ready", async () => {
-  await installExtension(REACT_DEVELOPER_TOOLS, {
-    loadExtensionOptions: {
-      allowFileAccess: true,
-    },
-    forceDownload: false, // 强制下载，不使用缓存
-  });
-});
 ```
