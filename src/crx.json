@@ -2,14 +2,14 @@
     "vue2_devtools_extended": {
         "githubRelease": "https://api.github.com/repos/kxxxlfe/devtools/releases",
         "id": "vue2_devtools_extended",
-        "version": "5.4.9"
+        "version": "5.4.19"
     },
     "bhljhndlimiafopmmhjlgfpnnchjjbhd": {
         "version": "0.5.0",
         "id": "bhljhndlimiafopmmhjlgfpnnchjjbhd"
     },
     "bmdblncegkenkacieihfhpjfppoconhi": {
-        "version": "4.13.1",
+        "version": "4.15.0",
         "id": "bmdblncegkenkacieihfhpjfppoconhi"
     },
     "dbhhnnnpaeobfddmlalhnehgclcmjimi": {
@@ -17,15 +17,15 @@
         "id": "dbhhnnnpaeobfddmlalhnehgclcmjimi"
     },
     "fmkadmapgofadopljbjfkapdkoienihi": {
-        "version": "6.1.1",
+        "version": "7.0.1",
         "id": "fmkadmapgofadopljbjfkapdkoienihi"
     },
     "ienfalfjdbdpebioblfackkekamfmbnh": {
-        "version": "1.0.30",
+        "version": "1.6.1",
         "id": "ienfalfjdbdpebioblfackkekamfmbnh"
     },
     "jdkknkkbebbapilgoeccciglkfbmbnfm": {
-        "version": "4.19.13",
+        "version": "4.21.11",
         "id": "jdkknkkbebbapilgoeccciglkfbmbnfm"
     },
     "lmhkpmbekcpmknklioeibfkpmmfibljd": {
@@ -33,7 +33,7 @@
         "id": "lmhkpmbekcpmknklioeibfkpmmfibljd"
     },
     "nhdogjmejiglipccpnnnanhbledajbpd": {
-        "version": "7.7.6",
+        "version": "7.7.7",
         "id": "nhdogjmejiglipccpnnnanhbledajbpd"
     },
     "iaajmlceplecbljialhhkmedjlpdblhp": {
