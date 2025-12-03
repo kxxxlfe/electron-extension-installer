@@ -1,6 +1,6 @@
 {
   "name": "@kxxxl-front-end/electron-extension-installer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "description": "Install any extension into electron",
   "types": "dist/index.d.ts",
